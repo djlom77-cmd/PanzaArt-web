@@ -1,88 +1,148 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome to Firebase Hosting</title>
+    <title>PanzArt - Arte en tu barriguita</title>
 
-    <!-- update the version number as needed -->
+    <!-- Firebase SDKs -->
     <script defer src="/__/firebase/13.2.0/firebase-app-compat.js"></script>
-    <!-- include only the Firebase features as you need -->
     <script defer src="/__/firebase/13.2.0/firebase-auth-compat.js"></script>
-    <script defer src="/__/firebase/13.2.0/firebase-database-compat.js"></script>
     <script defer src="/__/firebase/13.2.0/firebase-firestore-compat.js"></script>
-    <script defer src="/__/firebase/13.2.0/firebase-functions-compat.js"></script>
-    <script defer src="/__/firebase/13.2.0/firebase-messaging-compat.js"></script>
     <script defer src="/__/firebase/13.2.0/firebase-storage-compat.js"></script>
-    <script defer src="/__/firebase/13.2.0/firebase-analytics-compat.js"></script>
-    <script defer src="/__/firebase/13.2.0/firebase-remote-config-compat.js"></script>
-    <script defer src="/__/firebase/13.2.0/firebase-performance-compat.js"></script>
-    <!-- 
-      initialize the SDK after all desired features are loaded, set useEmulator to false
-      to avoid connecting the SDK to running emulators.
-    -->
-    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+    <script defer src="/__/firebase/init.js"></script>
 
-    <style media="screen">
-      body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
-      #message { background: white; max-width: 360px; margin: 100px auto 16px; padding: 32px 24px; border-radius: 3px; }
-      #message h2 { color: #ffa100; font-weight: bold; font-size: 16px; margin: 0 0 8px; }
-      #message h1 { font-size: 22px; font-weight: 300; color: rgba(0,0,0,0.6); margin: 0 0 16px;}
-      #message p { line-height: 140%; margin: 16px 0 24px; font-size: 14px; }
-      #message a { display: block; text-align: center; background: #039be5; text-transform: uppercase; text-decoration: none; color: white; padding: 16px; border-radius: 4px; }
-      #message, #message a { box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); }
-      #load { color: rgba(0,0,0,0.4); text-align: center; font-size: 13px; }
-      @media (max-width: 600px) {
-        body, #message { margin-top: 0; background: white; box-shadow: none; }
-        body { border-top: 16px solid #ffa100; }
-      }
+    <style>
+      body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 20px; }
+      header { text-align: center; margin-bottom: 30px; }
+      h1 { color: #d68910; }
+      .admin-panel { background: white; padding: 20px; border-radius: 8px; max-width: 600px; margin: 0 auto 30px auto; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+      .admin-panel input, .admin-panel select, .admin-panel button { width: 100%; padding: 10px; margin: 8px 0; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+      .admin-panel button { background: #27ae60; color: white; font-weight: bold; cursor: pointer; }
+      .admin-panel button:hover { background: #219653; }
+      .gallery-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; max-width: 1000px; margin: 0 auto; }
+      .category-card { background: white; padding: 15px; border-radius: 8px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+      .category-card img { max-width: 100%; height: 200px; object-fit: cover; border-radius: 4px; margin-top: 10px; }
+      .category-card h3 { color: #555; margin-bottom: 5px; }
     </style>
   </head>
   <body>
-    <div id="message">
-      <h2>Welcome</h2>
-      <h1>Firebase Hosting Setup Complete</h1>
-      <p>You're seeing this because you've successfully setup Firebase Hosting. Now it's time to go build something extraordinary!</p>
-      <a target="_blank" href="https://firebase.google.com/docs/hosting/">Open Hosting Documentation</a>
+
+    <header>
+      <h1>PanzArt</h1>
+      <p>Galería de trabajos y recuerdos</p>
+    </header>
+
+    <!-- ÁREA PRIVADA / ADMINISTRACIÓN -->
+    <div class="admin-panel" id="admin-area">
+      <h2>Área Privada - Subir Fotografía</h2>
+      <input type="file" id="photoFile" accept="image/*">
+      <input type="text" id="photoTitle" placeholder="Título de la obra (Ej: Flores silvestres)">
+      
+      <label for="categorySelect">Selecciona el Globo / Categoría:</label>
+      <select id="categorySelect">
+        <option value="Jardín de ternura">Jardín de ternura</option>
+        <option value="Un bosque encantado">Un bosque encantado</option>
+        <option value="Luna, sueños y estrellas">Luna, sueños y estrellas</option>
+        <option value="Mariposas de ilusión">Mariposas de ilusión</option>
+        <option value="Arcoíris de amor">Arcoíris de amor</option>
+        <option value="Un osito para soñar">Un osito para soñar</option>
+      </select>
+
+      <button id="uploadBtn">Guardar y Publicar Foto</button>
     </div>
-    <p id="load">Firebase SDK Loading&hellip;</p>
+
+    <!-- CONTENEDOR DE CATEGORÍAS (GLOBOS) -->
+    <div class="gallery-container" id="galleryContainer">
+      <!-- Se rellenarán dinámicamente desde Firestore -->
+    </div>
 
     <script>
       document.addEventListener('DOMContentLoaded', function() {
-        const loadEl = document.querySelector('#load');
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-        // // The Firebase SDK is initialized and available here!
-        //
-        // firebase.auth().onAuthStateChanged(user => { });
-        // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
-        // firebase.firestore().doc('/foo/bar').get().then(() => { });
-        // firebase.functions().httpsCallable('yourFunction')().then(() => { });
-        // firebase.messaging().requestPermission().then(() => { });
-        // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
-        // firebase.analytics(); // call to activate
-        // firebase.analytics().logEvent('tutorial_completed');
-        // firebase.performance(); // call to activate
-        //
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+        const db = firebase.firestore();
+        const storage = firebase.storage();
 
-        try {
-          let app = firebase.app();
-          let features = [
-            'auth', 
-            'database', 
-            'firestore',
-            'functions',
-            'messaging', 
-            'storage', 
-            'analytics', 
-            'remoteConfig',
-            'performance',
-          ].filter(feature => typeof app[feature] === 'function');
-          loadEl.textContent = `Firebase SDK loaded with ${features.join(', ')}`;
-        } catch (e) {
-          console.error(e);
-          loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
+        const categories = [
+          "Jardín de ternura",
+          "Un bosque encantado",
+          "Luna, sueños y estrellas",
+          "Mariposas de ilusión",
+          "Arcoíris de amor",
+          "Un osito para soñar"
+        ];
+
+        const galleryContainer = document.getElementById('galleryContainer');
+
+        // Función para pintar los huecos de los globos en la web
+        function renderGallery(photosData = {}) {
+          galleryContainer.innerHTML = '';
+          categories.forEach(cat => {
+            const photo = photosData[cat];
+            const card = document.createElement('div');
+            card.className = 'category-card';
+            
+            card.innerHTML = `
+              <h3>${cat}</h3>
+              ${photo ? `<img src="${photo.url}" alt="${photo.title}"><p><strong>${photo.title}</strong></p>` : `<p style="color: #888; font-style: italic;">Sin foto asignada todavía</p>`}
+            `;
+            galleryContainer.appendChild(card);
+          });
         }
+
+        // Cargar fotos desde Firestore en tiempo real
+        db.collection("photos").onSnapshot((snapshot) => {
+          let photosData = {};
+          snapshot.forEach((doc) => {
+            const data = doc.data();
+            photosData[data.category] = data; // Guardamos por categoría
+          });
+          renderGallery(photosData);
+        });
+
+        // Lógica para subir la foto al pulsar el botón
+        const uploadBtn = document.getElementById('uploadBtn');
+        uploadBtn.addEventListener('click', async () => {
+          const fileInput = document.getElementById('photoFile');
+          const titleInput = document.getElementById('photoTitle');
+          const categorySelect = document.getElementById('categorySelect');
+
+          const file = fileInput.files[0];
+          const title = titleInput.value || "Sin título";
+          const category = categorySelect.value;
+
+          if (!file) {
+            alert("Por favor, selecciona una imagen primero.");
+            return;
+          }
+
+          uploadBtn.textContent = "Subiendo...";
+          uploadBtn.disabled = true;
+
+          try {
+            // 1. Subir imagen a Firebase Storage
+            const storageRef = storage.ref(`photos/${Date.now()}_${file.name}`);
+            const snapshot = await storageRef.put(file);
+            const downloadURL = await snapshot.ref.getDownloadURL();
+
+            // 2. Guardar la referencia en Firestore (usando la categoría como ID único para que se sobrescriba o gestione por sección)
+            await db.collection("photos").doc(category).set({
+              title: title,
+              category: category,
+              url: downloadURL,
+              createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            });
+
+            alert("¡Foto guardada y publicada con éxito!");
+            fileInput.value = "";
+            titleInput.value = "";
+          } catch (error) {
+            console.error("Error al subir la foto: ", error);
+            alert("Hubo un error al subir la foto. Revisa la consola.");
+          } finally {
+            uploadBtn.textContent = "Guardar y Publicar Foto";
+            uploadBtn.disabled = false;
+          }
+        });
       });
     </script>
   </body>
