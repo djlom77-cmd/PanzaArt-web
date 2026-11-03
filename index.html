@@ -1,149 +1,277 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>PanzArt - Arte en tu barriguita</title>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#f8f1e8">
+<meta name="description" content="Pintura artística de barrigas de embarazada. Diseños personalizados, recuerdos llenos de ternura y color para una etapa irrepetible.">
+<title>PanzArt | Mayka y el arte de la maternidad</title>
 
-    <!-- Firebase SDKs -->
-    <script defer src="/__/firebase/13.2.0/firebase-app-compat.js"></script>
-    <script defer src="/__/firebase/13.2.0/firebase-auth-compat.js"></script>
-    <script defer src="/__/firebase/13.2.0/firebase-firestore-compat.js"></script>
-    <script defer src="/__/firebase/13.2.0/firebase-storage-compat.js"></script>
-    <script defer src="/__/firebase/init.js"></script>
+<!-- Firebase SDKs (Compatibles con Firebase Hosting) -->
+<script defer src="/__/firebase/13.2.0/firebase-app-compat.js"></script>
+<script defer src="/__/firebase/13.2.0/firebase-auth-compat.js"></script>
+<script defer src="/__/firebase/13.2.0/firebase-firestore-compat.js"></script>
+<script defer src="/__/firebase/13.2.0/firebase-storage-compat.js"></script>
+<script defer src="/__/firebase/init.js"></script>
 
-    <style>
-      body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 20px; }
-      header { text-align: center; margin-bottom: 30px; }
-      h1 { color: #d68910; }
-      .admin-panel { background: white; padding: 20px; border-radius: 8px; max-width: 600px; margin: 0 auto 30px auto; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-      .admin-panel input, .admin-panel select, .admin-panel button { width: 100%; padding: 10px; margin: 8px 0; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
-      .admin-panel button { background: #27ae60; color: white; font-weight: bold; cursor: pointer; }
-      .admin-panel button:hover { background: #219653; }
-      .gallery-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; max-width: 1000px; margin: 0 auto; }
-      .category-card { background: white; padding: 15px; border-radius: 8px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-      .category-card img { max-width: 100%; height: 200px; object-fit: cover; border-radius: 4px; margin-top: 10px; }
-      .category-card h3 { color: #555; margin-bottom: 5px; }
-    </style>
-  </head>
-  <body>
+<style>
+:root{
+ --cream:#fbf6ef;--paper:#fffdf9;--sage:#a9b6a0;--sage-dark:#596b59;
+ --terracotta:#c98168;--clay:#e8c6b3;--butter:#ead9a9;--ink:#51483f;
+ --muted:#82766b;--line:#eadfd3;--shadow:0 18px 55px rgba(94,72,55,.10);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{margin:0;background:var(--cream);color:var(--ink);font-family: 'Trebuchet MS',Arial,sans-serif;line-height:1.65}
+a{color:inherit;text-decoration:none}
+button,input,textarea,select{font:inherit}
+.wrap{width:min(1140px,91%);margin:auto}
+.announcement{background:var(--sage-dark);color:#fffaf2;text-align:center;padding:8px 15px;font-size:.83rem;letter-spacing:.04em}
+header{position:sticky;top:0;z-index:20;background:rgba(251,246,239,.94);backdrop-filter:blur(14px);border-bottom:1px solid rgba(234,223,211,.8)}
+.nav{min-height:78px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{display:flex;align-items:center;gap:12px;font-family:Georgia,serif;font-size:1.25rem;font-weight:bold;letter-spacing:.01em}
+.brand-mark{width:43px;height:43px;border-radius:50% 50% 48% 12%;background:var(--clay);display:grid;place-items:center;font-size:1.4rem;transform:rotate(-8deg)}
+.brand small{display:block;font: .68rem 'Trebuchet MS',sans-serif;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;margin-top:1px}
+.navlinks{display:flex;align-items:center;gap:25px;font-size:.92rem}
+.navlinks a:hover{color:var(--terracotta)}
+.admin-link{font-size:.82rem;border:1px solid var(--line);padding:7px 11px;border-radius:999px;cursor:pointer}
+.nav-cta,.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;background:var(--sage-dark);color:white;padding:13px 20px;border-radius:999px;border:0;cursor:pointer;transition:.2s}
+.nav-cta:hover,.btn:hover{transform:translateY(-2px);background:#465747}
+.menu-toggle{display:none;border:1px solid var(--line);background:var(--paper);border-radius:12px;padding:9px 13px;color:var(--ink);cursor:pointer}
+.hero{padding:66px 0 72px;overflow:hidden;position:relative}
+.hero-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:55px;align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;color:var(--sage-dark);font-size:.78rem;text-transform:uppercase;letter-spacing:.16em;font-weight:bold}
+.eyebrow:before{content:"";width:27px;height:1px;background:var(--terracotta)}
+h1,h2,h3{font-family:Georgia,'Times New Roman',serif;font-weight:normal;line-height:1.13}
+h1{font-size:clamp(2.8rem,5.7vw,5.2rem);letter-spacing:-.045em;margin:18px 0 22px}
+h1 em{color:var(--terracotta);font-weight:normal}
+.hero p{max-width:510px;font-size:1.08rem;color:var(--muted)}
+.hero-actions{display:flex;gap:13px;flex-wrap:wrap;margin-top:29px}
+.btn.secondary{background:transparent;color:var(--sage-dark);border:1px solid #c4cdbd}
+.btn.secondary:hover{background:#edf0e9}
+.hero-note{margin-top:22px;font-size:.84rem!important}
+.hero-art{min-height:480px;position:relative;display:grid;place-items:center}
+.art-blob{position:absolute;inset:8px 5px 8px 20px;background:#eee2d3;border-radius:47% 53% 45% 55% / 43% 42% 58% 57%;transform:rotate(4deg)}
+.art-blob:after{content:"";position:absolute;inset:20px;border:1px solid rgba(151,126,103,.3);border-radius:inherit}
+.art-card{position:relative;width:min(390px,83%);height:410px;background:#f7e8d9;border-radius:48% 48% 25px 25px;overflow:hidden;box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center}
+.art-card svg{width:100%;height:100%}
+.sticker{position:absolute;background:var(--paper);box-shadow:var(--shadow);padding:14px 17px;border-radius:18px;font-family:Georgia,serif;font-size:1.02rem;max-width:175px}
+.sticker.one{left:0;top:64px;transform:rotate(-5deg)}.sticker.two{right:0;bottom:55px;transform:rotate(4deg)}
+.sticker span{display:block;font: .76rem 'Trebuchet MS',sans-serif;color:var(--muted);margin-top:3px}
+.section{padding:86px 0}
+.section.white{background:var(--paper)}
+.section-head{text-align:center;max-width:700px;margin:0 auto 43px}
+.section-head .eyebrow{justify-content:center}
+h2{font-size:clamp(2.1rem,4vw,3.4rem);margin:14px 0}
+.section-head p{color:var(--muted);margin:0}
+.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.feature{padding:29px 26px;background:var(--cream);border:1px solid var(--line);border-radius:22px}
+.feature-icon{width:51px;height:51px;border-radius:17px;background:#e9d8c5;display:grid;place-items:center;font-size:1.5rem;margin-bottom:18px}
+.feature:nth-child(2) .feature-icon{background:#dce3d6}.feature:nth-child(3) .feature-icon{background:#f0e5bc}
+.feature h3{font-size:1.45rem;margin:0 0 10px}.feature p{color:var(--muted);margin:0;font-size:.95rem}
+.story-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:60px;align-items:center}
+.story-illustration{min-height:390px;background:#e7d9c9;border-radius:48% 48% 24px 24px;position:relative;overflow:hidden;display:grid;place-items:center}
+.story-illustration .sun{position:absolute;width:190px;height:190px;border-radius:50%;background:#f2e4bd;top:35px;right:24px}
+.story-illustration svg{position:relative;width:88%;max-height:370px}
+.story-copy h2{font-size:clamp(2.2rem,4vw,3.5rem)}
+.story-copy p{color:var(--muted)}
+.signature{font-family:Georgia,serif;font-style:italic;font-size:1.45rem;color:var(--terracotta);margin-top:20px}
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:19px}
+.gallery-item{position:relative;overflow:hidden;border-radius:22px;min-height:280px;background:#e7d9c9;isolation:isolate}
+.gallery-item:nth-child(2){background:#d9e1d2}.gallery-item:nth-child(3){background:#ead9b5}.gallery-item:nth-child(4){background:#e7cdbd}.gallery-item:nth-child(5){background:#e8e1d6}.gallery-item:nth-child(6){background:#d7dfd2}
+.gallery-item img{width:100%;height:100%;min-height:280px;object-fit:cover;display:block;transition:transform .4s}
+.gallery-item:hover img{transform:scale(1.04)}
+.gallery-caption{position:absolute;bottom:0;left:0;right:0;padding:36px 18px 16px;color:#fff;background:linear-gradient(transparent,rgba(49,44,36,.7));font-family:Georgia,serif;font-size:1.2rem;z-index:2}
+.gallery-note{text-align:center;color:var(--muted);font-size:.85rem;margin-top:19px}
+.process-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;counter-reset:steps}
+.process{padding:25px 0;border-top:1px solid var(--line);counter-increment:steps}
+.process:before{content:"0" counter(steps);font-family:Georgia,serif;color:var(--terracotta);font-size:1.6rem}
+.process h3{font-size:1.4rem;margin:13px 0 8px}.process p{color:var(--muted);margin:0}
+.price-box{background:#e8e9df;border-radius:28px;padding:45px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:35px}
+.price-box h2{margin-top:0}.price-box p{color:#667060;max-width:620px;margin-bottom:0}
+.price-tag{background:var(--paper);padding:21px 25px;border-radius:20px;text-align:center;min-width:180px}
+.price-tag strong{display:block;font:1.5rem Georgia,serif}.price-tag span{font-size:.8rem;color:var(--muted)}
+.contact-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:45px;align-items:start}
+.contact-copy p{color:var(--muted)}
+.contact-list{display:grid;gap:12px;margin-top:24px}
+.contact-line{display:flex;align-items:center;gap:13px;padding:13px 15px;border:1px solid var(--line);border-radius:15px;background:var(--paper);overflow-wrap:anywhere}
+.contact-line b{display:block;font-size:.92rem}.contact-line small{display:block;color:var(--muted)}
+.contact-symbol{width:42px;height:42px;border-radius:13px;background:#e0e6d9;display:grid;place-items:center;font-size:1.2rem;flex-shrink:0}
+.form-card{background:var(--paper);padding:29px;border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow)}
+.form-card h3{font-size:1.8rem;margin:0 0 7px}.form-card>p{color:var(--muted);font-size:.9rem;margin-top:0}
+form{display:grid;gap:14px}.form-row{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+label{font-size:.85rem;font-weight:bold;display:grid;gap:6px}
+input,textarea,select{width:100%;padding:12px 13px;border:1px solid #ded4c8;border-radius:12px;background:#fffdfa;color:var(--ink);outline:none}
+input:focus,textarea:focus,select:focus{border-color:var(--sage-dark);box-shadow:0 0 0 3px rgba(89,107,89,.1)}
+textarea{min-height:115px;resize:vertical}
+.form-help{font-size:.78rem;color:var(--muted);margin:0}
+footer{background:#514f43;color:#fff8ed;padding:35px 0}
+.footer-row{display:flex;justify-content:space-between;gap:20px;align-items:center;flex-wrap:wrap}
+.footer-brand{font:1.3rem Georgia,serif}.footer-small{font-size:.82rem;color:#ded6c8}
+.footer-links{display:flex;gap:18px;font-size:.86rem}
+.whatsapp{position:fixed;right:22px;bottom:22px;z-index:30;width:60px;height:60px;border-radius:50%;background:#637d5c;color:white;display:grid;place-items:center;box-shadow:0 8px 24px rgba(35,57,35,.3);border:3px solid rgba(255,255,255,.8);transition:.2s}
+.whatsapp:hover{transform:translateY(-3px) scale(1.04)}
+.whatsapp svg{width:29px;height:29px;fill:currentColor}
+.toast{display:none;background:#e1eadb;border-radius:12px;padding:12px;color:#435640;font-size:.9rem}
 
-    <header>
-      <h1>PanzArt</h1>
-      <p>Galería de trabajos y recuerdos</p>
-    </header>
+/* Estilos para el Pop-up (Modal) de Administración */
+.modal-overlay {
+ display: none;
+ position: fixed;
+ inset: 0;
+ z-index: 100;
+ background: rgba(81, 72, 63, 0.6);
+ backdrop-filter: blur(5px);
+ align-items: center;
+ justify-content: center;
+ padding: 20px;
+}
+.modal-overlay.open {
+ display: flex;
+}
+.modal-content {
+ background: var(--paper);
+ width: min(850px, 100%);
+ max-height: 90vh;
+ overflow-y: auto;
+ padding: 35px;
+ border-radius: 24px;
+ border: 1px solid var(--line);
+ box-shadow: var(--shadow);
+ position: relative;
+ animation: modalPop .3s ease-out;
+}
+@keyframes modalPop {
+ from { transform: translateY(20px); opacity: 0; }
+ to { transform: translateY(0); opacity: 1; }
+}
+.modal-close {
+ position: absolute;
+ top: 20px;
+ right: 20px;
+ background: var(--cream);
+ border: 1px solid var(--line);
+ border-radius: 50%;
+ width: 40px;
+ height: 40px;
+ font-size: 1.2rem;
+ cursor: pointer;
+ display: grid;
+ place-items: center;
+ color: var(--ink);
+ transition: .2s;
+}
+.modal-close:hover {
+ background: var(--terracotta);
+ color: white;
+ border-color: var(--terracotta);
+}
+.admin-preview{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:22px}
+.admin-photo{border:1px solid var(--line);border-radius:15px;overflow:hidden;background:var(--cream)}
+.admin-photo img{width:100%;height:180px;object-fit:cover;display:block}
+.admin-photo div{padding:10px;font-size:.88rem}
+.admin-photo button{margin:0 10px 12px;padding:7px 10px;border:1px solid var(--line);background:white;border-radius:9px;cursor:pointer;color:var(--ink)}
 
-    <!-- ÁREA PRIVADA / ADMINISTRACIÓN -->
-    <div class="admin-panel" id="admin-area">
-      <h2>Área Privada - Subir Fotografía</h2>
-      <input type="file" id="photoFile" accept="image/*">
-      <input type="text" id="photoTitle" placeholder="Título de la obra (Ej: Flores silvestres)">
-      
-      <label for="categorySelect">Selecciona el Globo / Categoría:</label>
-      <select id="categorySelect">
-        <option value="Jardín de ternura">Jardín de ternura</option>
-        <option value="Un bosque encantado">Un bosque encantado</option>
-        <option value="Luna, sueños y estrellas">Luna, sueños y estrellas</option>
-        <option value="Mariposas de ilusión">Mariposas de ilusión</option>
-        <option value="Arcoíris de amor">Arcoíris de amor</option>
-        <option value="Un osito para soñar">Un osito para soñar</option>
-      </select>
+@media(max-width:700px){.admin-preview{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:850px){
+ .navlinks{gap:14px}.nav-cta{padding:10px 14px}
+ .hero-grid{gap:25px}.hero-art{min-height:410px}.art-card{height:360px}
+ .story-grid,.contact-grid{gap:30px}
+}
+@media(max-width:700px){
+ .nav{min-height:70px}.menu-toggle{display:block}.nav-cta{display:none}
+ .navlinks{display:none;position:absolute;top:70px;left:0;right:0;padding:18px 5% 23px;background:var(--cream);border-bottom:1px solid var(--line);flex-direction:column;align-items:stretch;gap:0}
+ .navlinks.open{display:flex}.navlinks a{padding:12px 0;border-bottom:1px solid var(--line)}
+ .hero{padding:42px 0 55px}.hero-grid{grid-template-columns:1fr;gap:18px}
+ .hero-art{min-height:390px;max-width:500px;width:100%;margin:auto}.art-card{height:350px;width:72%}
+ .sticker.one{left:1%;top:45px}.sticker.two{right:0;bottom:35px}
+ .section{padding:64px 0}.feature-grid,.process-grid{grid-template-columns:1fr;gap:14px}
+ .story-grid,.contact-grid{grid-template-columns:1fr}.story-illustration{min-height:330px;max-width:470px;width:100%;margin:auto}
+ .gallery-grid{grid-template-columns:repeat(2,1fr);gap:12px}.gallery-item{min-height:225px}
+ .price-box{grid-template-columns:1fr;padding:29px;gap:22px}.price-tag{justify-self:start}
+ .form-row{grid-template-columns:1fr}.footer-row{align-items:flex-start;flex-direction:column}
+ .whatsapp{width:55px;height:55px;right:15px;bottom:15px}
+}
+@media(max-width:420px){.gallery-grid{grid-template-columns:1fr}.gallery-item{min-height:260px}.brand{font-size:1.08rem}.brand-mark{width:38px;height:38px}}
+</style>
+</head>
+<body>
+<div class="announcement">Un recuerdo lleno de amor para una espera irrepetible ✨</div>
+<header>
+ <div class="wrap nav">
+  <a class="brand" href="#inicio" aria-label="PanzArt, inicio"><span class="brand-mark">✿</span><span>PanzArt<small>Mayka · Arte en tu barriguita</small></span></a>
+  <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-label="Abrir menú">☰ Menú</button>
+  <nav class="navlinks" id="navlinks" aria-label="Menú principal">
+   <a href="#inicio">Inicio</a>
+   <a href="#historia">Mi historia</a>
+   <a href="#galeria">Galería</a>
+   <a href="#experiencia">La experiencia</a>
+   <a href="#precios">Precios</a>
+   <a href="#contacto">Contacto</a>
+   <a class="admin-link" id="openAdminModal">Área privada</a>
+  </nav>
+  <a class="nav-cta" href="#contacto">Hablemos ♡</a>
+ </div>
+</header>
+<main>
+<section class="hero" id="inicio">
+ <div class="wrap hero-grid">
+  <div>
+   <span class="eyebrow">Arte · Maternidad · Recuerdos</span>
+   <h1>Una obra de arte<br>que nace del <em>amor.</em></h1>
+   <p>Tu barriga cuenta una historia preciosa. La pintamos juntas para celebrar la vida que crece dentro de ti y guardar para siempre un recuerdo único de esta etapa.</p>
+   <div class="hero-actions"><a class="btn" href="#contacto">Quiero mi diseño <span>↗</span></a><a class="btn secondary" href="#galeria">Ver inspiración</a></div>
+   <p class="hero-note">♡ Diseños personalizados · Trato cercano · Precios a consultar</p>
+  </div>
+  <div class="hero-art" aria-label="Ilustración decorativa de una barriga pintada con flores">
+   <div class="art-blob"></div>
+   <div class="art-card">
+    <svg viewBox="0 0 360 430" role="img" aria-label="Ilustración artística de una barriga de embarazada con flores">
+     <defs><linearGradient id="skin" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e8bfa5"/><stop offset="1" stop-color="#c98f74"/></linearGradient></defs>
+     <path d="M70 0 Q65 55 92 95 Q105 130 84 169 Q58 213 76 272 Q91 325 142 351 L240 351 Q293 322 300 267 Q307 220 277 175 Q254 140 269 99 Q289 53 282 0Z" fill="#f6e9dc"/>
+     <path d="M103 83 Q143 106 180 101 Q220 108 260 82 Q250 139 275 179 Q306 228 283 280 Q260 335 202 352 L152 352 Q97 329 78 281 Q60 231 89 181 Q112 142 103 83Z" fill="url(#skin)"/>
+     <path d="M113 224 Q127 181 156 187 Q171 191 177 210 Q194 177 219 190 Q248 205 244 234 Q240 263 207 289 Q190 304 177 318 Q161 300 141 282 Q109 253 113 224Z" fill="#f3d9b6" opacity=".96"/>
+     <g fill="none" stroke="#738b68" stroke-width="3" stroke-linecap="round">
+      <path d="M178 306 Q174 264 188 224 Q195 204 216 194"/><path d="M181 275 Q157 261 145 241"/><path d="M186 247 Q207 248 224 231"/><path d="M174 290 Q154 289 141 274"/>
+     </g>
+     <g fill="#f7efe1" stroke="#d6a18b" stroke-width="1.4">
+      <circle cx="217" cy="191" r="10"/><circle cx="217" cy="174" r="10"/><circle cx="232" cy="183" r="10"/><circle cx="225" cy="199" r="10"/><circle cx="207" cy="202" r="10"/>
+      <circle cx="145" cy="239" r="8"/><circle cx="145" cy="225" r="8"/><circle cx="158" cy="232" r="8"/><circle cx="153" cy="246" r="8"/><circle cx="138" cy="248" r="8"/>
+      <circle cx="223" cy="230" r="7"/><circle cx="223" cy="218" r="7"/><circle cx="234" cy="225" r="7"/><circle cx="229" cy="237" r="7"/><circle cx="216" cy="238" r="7"/>
+     </g>
+     <g fill="#c98168"><circle cx="217" cy="190" r="5"/><circle cx="145" cy="239" r="4"/><circle cx="223" cy="230" r="3.5"/></g>
+     <g fill="#84987a"><ellipse cx="165" cy="269" rx="7" ry="15" transform="rotate(-43 165 269)"/><ellipse cx="201" cy="262" rx="7" ry="15" transform="rotate(44 201 262)"/><ellipse cx="196" cy="218" rx="6" ry="13" transform="rotate(40 196 218)"/></g>
+     <path d="M145 352 Q177 369 239 352" fill="none" stroke="#b67d65" stroke-width="2" opacity=".6"/>
+     <g fill="#fff8ef" opacity=".9"><circle cx="105" cy="119" r="3"/><circle cx="258" cy="140" r="4"/><circle cx="100" cy="287" r="3"/><path d="M267 291 l3 7 7 3 -7 3 -3 7 -3 -7 -7 -3 7 -3Z"/></g>
+    </svg>
+   </div>
+   <div class="sticker one">Pequeños milagros<span>merecen grandes recuerdos</span></div>
+   <div class="sticker two">Hecho con mimo ♡<span>Tu idea, hecha arte</span></div>
+  </div>
+ </div>
+</section>
 
-      <button id="uploadBtn">Guardar y Publicar Foto</button>
-    </div>
+<section class="section white">
+ <div class="wrap">
+  <div class="section-head"><span class="eyebrow">Mucho más que pintura</span><h2>Un momento solo vuestro</h2><p>La pintura de barriga es una forma dulce y artística de celebrar la espera, conectar con tu bebé y convertir tu tripita en un lienzo lleno de significado.</p></div>
+  <div class="feature-grid">
+   <article class="feature"><div class="feature-icon">🌿</div><h3>Diseños con alma</h3><p>Flores, naturaleza, animalitos, cuentos, personajes o una idea que tenga un significado especial para ti. Cada diseño habla de vuestra historia.</p></article>
+   <article class="feature"><div class="feature-icon">🤍</div><h3>Un recuerdo irrepetible</h3><p>Disfruta de la experiencia, hazte fotografías preciosas y conserva para siempre la emoción de esos días antes de conocer a tu bebé.</p></article>
+   <article class="feature"><div class="feature-icon">🎨</div><h3>Creado para ti</h3><p>Me cuentas qué te gusta, qué imaginas y qué te gustaría recordar. Juntas damos forma a un diseño pensado especialmente para ti.</p></article>
+  </div>
+ </div>
+</section>
 
-    <!-- CONTENEDOR DE CATEGORÍAS (GLOBOS) -->
-    <div class="gallery-container" id="galleryContainer">
-      <!-- Se rellenarán dinámicamente desde Firestore -->
-    </div>
-
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        const db = firebase.firestore();
-        const storage = firebase.storage();
-
-        const categories = [
-          "Jardín de ternura",
-          "Un bosque encantado",
-          "Luna, sueños y estrellas",
-          "Mariposas de ilusión",
-          "Arcoíris de amor",
-          "Un osito para soñar"
-        ];
-
-        const galleryContainer = document.getElementById('galleryContainer');
-
-        // Función para pintar los huecos de los globos en la web
-        function renderGallery(photosData = {}) {
-          galleryContainer.innerHTML = '';
-          categories.forEach(cat => {
-            const photo = photosData[cat];
-            const card = document.createElement('div');
-            card.className = 'category-card';
-            
-            card.innerHTML = `
-              <h3>${cat}</h3>
-              ${photo ? `<img src="${photo.url}" alt="${photo.title}"><p><strong>${photo.title}</strong></p>` : `<p style="color: #888; font-style: italic;">Sin foto asignada todavía</p>`}
-            `;
-            galleryContainer.appendChild(card);
-          });
-        }
-
-        // Cargar fotos desde Firestore en tiempo real
-        db.collection("photos").onSnapshot((snapshot) => {
-          let photosData = {};
-          snapshot.forEach((doc) => {
-            const data = doc.data();
-            photosData[data.category] = data; // Guardamos por categoría
-          });
-          renderGallery(photosData);
-        });
-
-        // Lógica para subir la foto al pulsar el botón
-        const uploadBtn = document.getElementById('uploadBtn');
-        uploadBtn.addEventListener('click', async () => {
-          const fileInput = document.getElementById('photoFile');
-          const titleInput = document.getElementById('photoTitle');
-          const categorySelect = document.getElementById('categorySelect');
-
-          const file = fileInput.files[0];
-          const title = titleInput.value || "Sin título";
-          const category = categorySelect.value;
-
-          if (!file) {
-            alert("Por favor, selecciona una imagen primero.");
-            return;
-          }
-
-          uploadBtn.textContent = "Subiendo...";
-          uploadBtn.disabled = true;
-
-          try {
-            // 1. Subir imagen a Firebase Storage
-            const storageRef = storage.ref(`photos/${Date.now()}_${file.name}`);
-            const snapshot = await storageRef.put(file);
-            const downloadURL = await snapshot.ref.getDownloadURL();
-
-            // 2. Guardar la referencia en Firestore (usando la categoría como ID único para que se sobrescriba o gestione por sección)
-            await db.collection("photos").doc(category).set({
-              title: title,
-              category: category,
-              url: downloadURL,
-              createdAt: firebase.firestore.FieldValue.serverTimestamp()
-            });
-
-            alert("¡Foto guardada y publicada con éxito!");
-            fileInput.value = "";
-            titleInput.value = "";
-          } catch (error) {
-            console.error("Error al subir la foto: ", error);
-            alert("Hubo un error al subir la foto. Revisa la consola.");
-          } finally {
-            uploadBtn.textContent = "Guardar y Publicar Foto";
-            uploadBtn.disabled = false;
-          }
-        });
-      });
-    </script>
-  </body>
-</html>
+<section class="section" id="historia">
+ <div class="wrap story-grid">
+  <div class="story-illustration">
+   <div class="sun"></div>
+   <svg viewBox="0 0 360 380" role="img" aria-label="Ilustración cálida de maternidad">
+    <path d="M65 0 Q75 72 105 99 Q131 123 119 169 Q100 225 132 270 Q154 300 187 308 L247 308 Q287 283 289 234 Q290 194 264 165 Q244 136 259 98 Q274 55 269 0Z" fill="#f3e9dc"/>
+    <path d="M116 81 Q151 107 182 98 Q216 105 253 81 Q243 132 265 168 Q291 211 272 251 Q253 293 213 310 L166 310 Q125 289 111 251 Q96 214 119 170 Q137 133 116 81Z" fill="#d8a58b"/>
+    <path d="M130 211 Q144 176 169 183 Q184 187 190 207 Q208 177 230 193 Q251 210 239 235 Q226 260 198 280 L184 293 Q167 276 151 260 Q126 237 130 211Z" fill="#eee0bf"/>
+    <g fill="none" stroke="#819477" stroke-width="3" stroke-linecap="round"><path d="M183 286 Q178 248 194 219 Q205 200 223 198"/><path d="M184 262 Q164 254 153 235"/><path d="M193 238 Q212 240 225 225"/></g>
+    <g fill="#fff7e9" stroke="#d1a18b" stroke-width="1.3"><circle cx="224" cy="197" r="9"/><circle cx="224" cy="182" r="9"/><circle cx="238" cy="190" r="9"/><circle cx="231" cy="205" r="9"/><circle cx="216" cy="207" r="9"/><circle cx="153" cy="234" r="7"/><circle cx="153" cy="222" r="7"/><circle cx="165" cy="228" r="7"/><circle cx="160" cy="240" r="7"/></g>
+    <g fill="#c98168"><circle cx="224" cy="197" r="4"/><circle cx="153" cy="234" r="3.5"/></g>
+    <path d="M105 0 Q92 34 107 64 Q124 90 147 91" fill="none" stroke="#c98168" stroke-width="6" stroke-linecap="round"/>
+    <path d="M270 0 Q286 35 270 62 Q254 88 232 91" fil
