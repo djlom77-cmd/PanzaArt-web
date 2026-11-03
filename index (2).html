@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#f8f1e8">
+<meta name="description" content="Pintura artística de barrigas de embarazada. Diseños personalizados, recuerdos llenos de ternura y color para una etapa irrepetible.">
+<title>PanzArt | Mayka y el arte de la maternidad</title>
+<style>
+:root{
+ --cream:#fbf6ef;--paper:#fffdf9;--sage:#a9b6a0;--sage-dark:#596b59;
+ --terracotta:#c98168;--clay:#e8c6b3;--butter:#ead9a9;--ink:#51483f;
+ --muted:#82766b;--line:#eadfd3;--shadow:0 18px 55px rgba(94,72,55,.10);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{margin:0;background:var(--cream);color:var(--ink);font-family: 'Trebuchet MS',Arial,sans-serif;line-height:1.65}
+a{color:inherit;text-decoration:none}
+button,input,textarea,select{font:inherit}
+.wrap{width:min(1140px,91%);margin:auto}
+.announcement{background:var(--sage-dark);color:#fffaf2;text-align:center;padding:8px 15px;font-size:.83rem;letter-spacing:.04em}
+header{position:sticky;top:0;z-index:20;background:rgba(251,246,239,.94);backdrop-filter:blur(14px);border-bottom:1px solid rgba(234,223,211,.8)}
+.nav{min-height:78px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{display:flex;align-items:center;gap:12px;font-family:Georgia,serif;font-size:1.25rem;font-weight:bold;letter-spacing:.01em}
+.brand-mark{width:43px;height:43px;border-radius:50% 50% 48% 12%;background:var(--clay);display:grid;place-items:center;font-size:1.4rem;transform:rotate(-8deg)}
+.brand small{display:block;font: .68rem 'Trebuchet MS',sans-serif;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;margin-top:1px}
+.navlinks{display:flex;align-items:center;gap:25px;font-size:.92rem}
+.navlinks a:hover{color:var(--terracotta)}
+.admin-link{font-size:.82rem;border:1px solid var(--line);padding:7px 11px;border-radius:999px;cursor:pointer}
+.nav-cta,.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;background:var(--sage-dark);color:white;padding:13px 20px;border-radius:999px;border:0;cursor:pointer;transition:.2s}
+.nav-cta:hover,.btn:hover{transform:translateY(-2px);background:#465747}
+.menu-toggle{display:none;border:1px solid var(--line);background:var(--paper);border-radius:12px;padding:9px 13px;color:var(--ink);cursor:pointer}
+.hero{padding:66px 0 72px;overflow:hidden;position:relative}
+.hero-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:55px;align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;color:var(--sage-dark);font-size:.78rem;text-transform:uppercase;letter-spacing:.16em;font-weight:bold}
+.eyebrow:before{content:"";width:27px;height:1px;background:var(--terracotta)}
+h1,h2,h3{font-family:Georgia,'Times New Roman',serif;font-weight:normal;line-height:1.13}
+h1{font-size:clamp(2.8rem,5.7vw,5.2rem);letter-spacing:-.045em;margin:18px 0 22px}
+h1 em{color:var(--terracotta);font-weight:normal}
+.hero p{max-width:510px;font-size:1.08rem;color:var(--muted)}
+.hero-actions{display:flex;gap:13px;flex-wrap:wrap;margin-top:29px}
+.btn.secondary{background:transparent;color:var(--sage-dark);border:1px solid #c4cdbd}
+.btn.secondary:hover{background:#edf0e9}
+.hero-note{margin-top:22px;font-size:.84rem!important}
+.hero-art{min-height:480px;position:relative;display:grid;place-items:center}
+.art-blob{position:absolute;inset:8px 5px 8px 20px;background:#eee2d3;border-radius:47% 53% 45% 55% / 43% 42% 58% 57%;transform:rotate(4deg)}
+.art-blob:after{content:"";position:absolute;inset:20px;border:1px solid rgba(151,126,103,.3);border-radius:inherit}
+.art-card{position:relative;width:min(390px,83%);height:410px;background:#f7e8d9;border-radius:48% 48% 25px 25px;overflow:hidden;box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center}
+.art-card svg{width:100%;height:100%}
+.sticker{position:absolute;background:var(--paper);box-shadow:var(--shadow);padding:14px 17px;border-radius:18px;font-family:Georgia,serif;font-size:1.02rem;max-width:175px}
+.sticker.one{left:0;top:64px;transform:rotate(-5deg)}.sticker.two{right:0;bottom:55px;transform:rotate(4deg)}
+.sticker span{display:block;font: .76rem 'Trebuchet MS',sans-serif;color:var(--muted);margin-top:3px}
+.section{padding:86px 0}
+.section.white{background:var(--paper)}
+.section-head{text-align:center;max-width:700px;margin:0 auto 43px}
+.section-head .eyebrow{justify-content:center}
+h2{font-size:clamp(2.1rem,4vw,3.4rem);margin:14px 0}
+.section-head p{color:var(--muted);margin:0}
+.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.feature{padding:29px 26px;background:var(--cream);border:1px solid var(--line);border-radius:22px}
+.feature-icon{width:51px;height:51px;border-radius:17px;background:#e9d8c5;display:grid;place-items:center;font-size:1.5rem;margin-bottom:18px}
+.feature:nth-child(2) .feature-icon{background:#dce3d6}.feature:nth-child(3) .feature-icon{background:#f0e5bc}
+.feature h3{font-size:1.45rem;margin:0 0 10px}.feature p{color:var(--muted);margin:0;font-size:.95rem}
+.story-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:60px;align-items:center}
+.story-illustration{min-height:390px;background:#e7d9c9;border-radius:48% 48% 24px 24px;position:relative;overflow:hidden;display:grid;place-items:center}
+.story-illustration .sun{position:absolute;width:190px;height:190px;border-radius:50%;background:#f2e4bd;top:35px;right:24px}
+.story-illustration svg{position:relative;width:88%;max-height:370px}
+.story-copy h2{font-size:clamp(2.2rem,4vw,3.5rem)}
+.story-copy p{color:var(--muted)}
+.signature{font-family:Georgia,serif;font-style:italic;font-size:1.45rem;color:var(--terracotta);margin-top:20px}
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:19px}
+.gallery-item{position:relative;overflow:hidden;border-radius:22px;min-height:280px;background:#e7d9c9;isolation:isolate}
+.gallery-item:nth-child(2){background:#d9e1d2}.gallery-item:nth-child(3){background:#ead9b5}.gallery-item:nth-child(4){background:#e7cdbd}.gallery-item:nth-child(5){background:#e8e1d6}.gallery-item:nth-child(6){background:#d7dfd2}
+.gallery-item svg{width:100%;height:100%;min-height:280px;display:block;transition:transform .4s}
+.gallery-item:hover svg{transform:scale(1.04)}
+.gallery-caption{position:absolute;bottom:0;left:0;right:0;padding:36px 18px 16px;color:#fff;background:linear-gradient(transparent,rgba(49,44,36,.7));font-family:Georgia,serif;font-size:1.2rem;z-index:2}
+.gallery-note{text-align:center;color:var(--muted);font-size:.85rem;margin-top:19px}
+.process-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;counter-reset:steps}
+.process{padding:25px 0;border-top:1px solid var(--line);counter-increment:steps}
+.process:before{content:"0" counter(steps);font-family:Georgia,serif;color:var(--terracotta);font-size:1.6rem}
+.process h3{font-size:1.4rem;margin:13px 0 8px}.process p{color:var(--muted);margin:0}
+.price-box{background:#e8e9df;border-radius:28px;padding:45px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:35px}
+.price-box h2{margin-top:0}.price-box p{color:#667060;max-width:620px;margin-bottom:0}
+.price-tag{background:var(--paper);padding:21px 25px;border-radius:20px;text-align:center;min-width:180px}
+.price-tag strong{display:block;font:1.5rem Georgia,serif}.price-tag span{font-size:.8rem;color:var(--muted)}
+.contact-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:45px;align-items:start}
+.contact-copy p{color:var(--muted)}
+.contact-list{display:grid;gap:12px;margin-top:24px}
+.contact-line{display:flex;align-items:center;gap:13px;padding:13px 15px;border:1px solid var(--line);border-radius:15px;background:var(--paper);overflow-wrap:anywhere}
+.contact-line b{display:block;font-size:.92rem}.contact-line small{display:block;color:var(--muted)}
+.contact-symbol{width:42px;height:42px;border-radius:13px;background:#e0e6d9;display:grid;place-items:center;font-size:1.2rem;flex-shrink:0}
+.form-card{background:var(--paper);padding:29px;border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow)}
+.form-card h3{font-size:1.8rem;margin:0 0 7px}.form-card>p{color:var(--muted);font-size:.9rem;margin-top:0}
+form{display:grid;gap:14px}.form-row{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+label{font-size:.85rem;font-weight:bold;display:grid;gap:6px}
+input,textarea,select{width:100%;padding:12px 13px;border:1px solid #ded4c8;border-radius:12px;background:#fffdfa;color:var(--ink);outline:none}
+input:focus,textarea:focus,select:focus{border-color:var(--sage-dark);box-shadow:0 0 0 3px rgba(89,107,89,.1)}
+textarea{min-height:115px;resize:vertical}
+.form-help{font-size:.78rem;color:var(--muted);margin:0}
+footer{background:#514f43;color:#fff8ed;padding:35px 0}
+.footer-row{display:flex;justify-content:space-between;gap:20px;align-items:center;flex-wrap:wrap}
+.footer-brand{font:1.3rem Georgia,serif}.footer-small{font-size:.82rem;color:#ded6c8}
+.footer-links{display:flex;gap:18px;font-size:.86rem}
+.whatsapp{position:fixed;right:22px;bottom:22px;z-index:30;width:60px;height:60px;border-radius:50%;background:#637d5c;color:white;display:grid;place-items:center;box-shadow:0 8px 24px rgba(35,57,35,.3);border:3px solid rgba(255,255,255,.8);transition:.2s}
+.whatsapp:hover{transform:translateY(-3px) scale(1.04)}
+.whatsapp svg{width:29px;height:29px;fill:currentColor}
+.toast{display:none;background:#e1eadb;border-radius:12px;padding:12px;color:#435640;font-size:.9rem}
+
+/* Estilos para el Pop-up (Modal) de Administración */
+.modal-overlay {
+ display: none;
+ position: fixed;
+ inset: 0;
+ z-index: 100;
+ background: rgba(81, 72, 63, 0.6);
+ backdrop-filter: blur(5px);
+ align-items: center;
+ justify-content: center;
+ padding: 20px;
+}
+.modal-overlay.open {
+ display: flex;
+}
+.modal-content {
+ background: var(--paper);
+ width: min(850px, 100%);
+ max-height: 90vh;
+ overflow-y: auto;
+ padding: 35px;
+ border-radius: 24px;
+ border: 1px solid var(--line);
+ box-shadow: var(--shadow);
+ position: relative;
+ animation: modalPop .3s ease-out;
+}
+@keyframes modalPop {
+ from { transform: translateY(20px); opacity: 0; }
+ to { transform: translateY(0); opacity: 1; }
+}
+.modal-close {
+ position: absolute;
+ top: 20px;
+ right: 20px;
+ background: var(--cream);
+ border: 1px solid var(--line);
+ border-radius: 50%;
+ width: 40px;
+ height: 40px;
+ font-size: 1.2rem;
+ cursor: pointer;
+ display: grid;
+ place-items: center;
+ color: var(--ink);
+ transition: .2s;
+}
+.modal-close:hover {
+ background: var(--terracotta);
+ color: white;
+ border-color: var(--terracotta);
+}
+.admin-preview{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:22px}
+.admin-photo{border:1px solid var(--line);border-radius:15px;overflow:hidden;background:var(--cream)}
+.admin-photo img{width:100%;height:180px;object-fit:cover;display:block}
+.admin-photo div{padding:10px;font-size:.88rem}
+.admin-photo button{margin:0 10px 12px;padding:7px 10px;border:1px solid var(--line);background:white;border-radius:9px;cursor:pointer;color:var(--ink)}
+
+@media(max-width:700px){.admin-preview{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:850px){
+ .navlinks{gap:14px}.nav-cta{padding:10px 14px}
+ .hero-grid{gap:25px}.hero-art{min-height:410px}.art-card{height:360px}
+ .story-grid,.contact-grid{gap:30px}
+}
+@media(max-width:700px){
+ .nav{min-height:70px}.menu-toggle{display:block}.nav-cta{display:none}
+ .navlinks{display:none;position:absolute;top:70px;left:0;right:0;padding:18px 5% 23px;background:var(--cream);border-bottom:1px solid var(--line);flex-direction:column;align-items:stretch;gap:0}
+ .navlinks.open{display:flex}.navlinks a{padding:12px 0;border-bottom:1px solid var(--line)}
+ .hero{padding:42px 0 55px}.hero-grid{grid-template-columns:1fr;gap:18px}
+ .hero-art{min-height:390px;max-width:500px;width:100%;margin:auto}.art-card{height:350px;width:72%}
+ .sticker.one{left:1%;top:45px}.sticker.two{right:0;bottom:35px}
+ .section{padding:64px 0}.feature-grid,.process-grid{grid-template-columns:1fr;gap:14px}
+ .story-grid,.contact-grid{grid-template-columns:1fr}.story-illustration{min-height:330px;max-width:470px;width:100%;margin:auto}
+ .gallery-grid{grid-template-columns:repeat(2,1fr);gap:12px}.gallery-item,.gallery-item svg{min-height:225px}
+ .price-box{grid-template-columns:1fr;padding:29px;gap:22px}.price-tag{justify-self:start}
+ .form-row{grid-template-columns:1fr}.footer-row{align-items:flex-start;flex-direction:column}
+ .whatsapp{width:55px;height:55px;right:15px;bottom:15px}
+}
+@media(max-width:420px){.gallery-grid{grid-template-columns:1fr}.gallery-item,.gallery-item svg{min-height:260px}.brand{font-size:1.08rem}.brand-mark{width:38px;height:38px}}
+</style>
+</head>
+<body>
+<div class="announcement">Un recuerdo lleno de amor para una espera irrepetible ✨</div>
+<header>
+ <div class="wrap nav">
+  <a class="brand" href="#inicio" aria-label="PanzArt, inicio"><span class="brand-mark">✿</span><span>PanzArt<small>Mayka · Arte en tu barriguita</small></span></a>
+  <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-label="Abrir menú">☰ Menú</button>
+  <nav class="navlinks" id="navlinks" aria-label="Menú principal">
+   <a href="#inicio">Inicio</a>
+   <a href="#historia">Mi historia</a>
+   <a href="#galeria">Galería</a>
+   <a href="#experiencia">La experiencia</a>
+   <a href="#precios">Precios</a>
+   <a href="#contacto">Contacto</a>
+   <a class="admin-link" id="openAdminModal">Área privada</a>
+  </nav>
+  <a class="nav-cta" href="#contacto">Hablemos ♡</a>
+ </div>
+</header>
+<main>
+<section class="hero" id="inicio">
+ <div class="wrap hero-grid">
+  <div>
+   <span class="eyebrow">Arte · Maternidad · Recuerdos</span>
+   <h1>Una obra de arte<br>que nace del <em>amor.</em></h1>
+   <p>Tu barriga cuenta una historia preciosa. La pintamos juntas para celebrar la vida que crece dentro de ti y guardar para siempre un recuerdo único de esta etapa.</p>
+   <div class="hero-actions"><a class="btn" href="#contacto">Quiero mi diseño <span>↗</span></a><a class="btn secondary" href="#galeria">Ver inspiración</a></div>
+   <p class="hero-note">♡ Diseños personalizados · Trato cercano · Precios a consultar</p>
+  </div>
+  <div class="hero-art" aria-label="Ilustración decorativa de una barriga pintada con flores">
+   <div class="art-blob"></div>
+   <div class="art-card">
+    <svg viewBox="0 0 360 430" role="img" aria-label="Ilustración artística de una barriga de embarazada con flores">
+     <defs><linearGradient id="skin" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e8bfa5"/><stop offset="1" stop-color="#c98f74"/></linearGradient></defs>
+     <path d="M70 0 Q65 55 92 95 Q105 130 84 169 Q58 213 76 272 Q91 325 142 351 L240 351 Q293 322 300 267 Q307 220 277 175 Q254 140 269 99 Q289 53 282 0Z" fill="#f6e9dc"/>
+     <path d="M103 83 Q143 106 180 101 Q220 108 260 82 Q250 139 275 179 Q306 228 283 280 Q260 335 202 352 L152 352 Q97 329 78 281 Q60 231 89 181 Q112 142 103 83Z" fill="url(#skin)"/>
+     <path d="M113 224 Q127 181 156 187 Q171 191 177 210 Q194 177 219 190 Q248 205 244 234 Q240 263 207 289 Q190 304 177 318 Q161 300 141 282 Q109 253 113 224Z" fill="#f3d9b6" opacity=".96"/>
+     <g fill="none" stroke="#738b68" stroke-width="3" stroke-linecap="round">
+      <path d="M178 306 Q174 264 188 224 Q195 204 216 194"/><path d="M181 275 Q157 261 145 241"/><path d="M186 247 Q207 248 224 231"/><path d="M174 290 Q154 289 141 274"/>
+     </g>
+     <g fill="#f7efe1" stroke="#d6a18b" stroke-width="1.4">
+      <circle cx="217" cy="191" r="10"/><circle cx="217" cy="174" r="10"/><circle cx="232" cy="183" r="10"/><circle cx="225" cy="199" r="10"/><circle cx="207" cy="202" r="10"/>
+      <circle cx="145" cy="239" r="8"/><circle cx="145" cy="225" r="8"/><circle cx="158" cy="232" r="8"/><circle cx="153" cy="246" r="8"/><circle cx="138" cy="248" r="8"/>
+      <circle cx="223" cy="230" r="7"/><circle cx="223" cy="218" r="7"/><circle cx="234" cy="225" r="7"/><circle cx="229" cy="237" r="7"/><circle cx="216" cy="238" r="7"/>
+     </g>
+     <g fill="#c98168"><circle cx="217" cy="190" r="5"/><circle cx="145" cy="239" r="4"/><circle cx="223" cy="230" r="3.5"/></g>
+     <g fill="#84987a"><ellipse cx="165" cy="269" rx="7" ry="15" transform="rotate(-43 165 269)"/><ellipse cx="201" cy="262" rx="7" ry="15" transform="rotate(44 201 262)"/><ellipse cx="196" cy="218" rx="6" ry="13" transform="rotate(40 196 218)"/></g>
+     <path d="M145 352 Q177 369 239 352" fill="none" stroke="#b67d65" stroke-width="2" opacity=".6"/>
+     <g fill="#fff8ef" opacity=".9"><circle cx="105" cy="119" r="3"/><circle cx="258" cy="140" r="4"/><circle cx="100" cy="287" r="3"/><path d="M267 291 l3 7 7 3 -7 3 -3 7 -3 -7 -7 -3 7 -3Z"/></g>
+    </svg>
+   </div>
+   <div class="sticker one">Pequeños milagros<span>merecen grandes recuerdos</span></div>
+   <div class="sticker two">Hecho con mimo ♡<span>Tu idea, hecha arte</span></div>
+  </div>
+ </div>
+</section>
+<section class="section white">
+ <div class="wrap">
+  <div class="section-head"><span class="eyebrow">Mucho más que pintura</span><h2>Un momento solo vuestro</h2><p>La pintura de barriga es una forma dulce y artística de celebrar la espera, conectar con tu bebé y convertir tu tripita en un lienzo lleno de significado.</p></div>
+  <div class="feature-grid">
+   <article class="feature"><div class="feature-icon">🌿</div><h3>Diseños con alma</h3><p>Flores, naturaleza, animalitos, cuentos, personajes o una idea que tenga un significado especial para ti. Cada diseño habla de vuestra historia.</p></article>
+   <article class="feature"><div class="feature-icon">🤍</div><h3>Un recuerdo irrepetible</h3><p>Disfruta de la experiencia, hazte fotografías preciosas y conserva para siempre la emoción de esos días antes de conocer a tu bebé.</p></article>
+   <article class="feature"><div class="feature-icon">🎨</div><h3>Creado para ti</h3><p>Me cuentas qué te gusta, qué imaginas y qué te gustaría recordar. Juntas damos forma a un diseño pensado especialmente para ti.</p></article>
+  </div>
+ </div>
+</section>
+<section class="section" id="historia">
+ <div class="wrap story-grid">
+  <div class="story-illustration">
+   <div class="sun"></div>
+   <svg viewBox="0 0 360 380" role="img" aria-label="Ilustración cálida de maternidad">
+    <path d="M65 0 Q75 72 105 99 Q131 123 119 169 Q100 225 132 270 Q154 300 187 308 L247 308 Q287 283 289 234 Q290 194 264 165 Q244 136 259 98 Q274 55 269 0Z" fill="#f3e9dc"/>
+    <path d="M116 81 Q151 107 182 98 Q216 105 253 81 Q243 132 265 168 Q291 211 272 251 Q253 293 213 310 L166 310 Q125 289 111 251 Q96 214 119 170 Q137 133 116 81Z" fill="#d8a58b"/>
+    <path d="M130 211 Q144 176 169 183 Q184 187 190 207 Q208 177 230 193 Q251 210 239 235 Q226 260 198 280 L184 293 Q167 276 151 260 Q126 237 130 211Z" fill="#eee0bf"/>
+    <g fill="none" stroke="#819477" stroke-width="3" stroke-linecap="round"><path d="M183 286 Q178 248 194 219 Q205 200 223 198"/><path d="M184 262 Q164 254 153 235"/><path d="M193 238 Q212 240 225 225"/></g>
+    <g fill="#fff7e9" stroke="#d1a18b" stroke-width="1.3"><circle cx="224" cy="197" r="9"/><circle cx="224" cy="182" r="9"/><circle cx="238" cy="190" r="9"/><circle cx="231" cy="205" r="9"/><circle cx="216" cy="207" r="9"/><circle cx="153" cy="234" r="7"/><circle cx="153" cy="222" r="7"/><circle cx="165" cy="228" r="7"/><circle cx="160" cy="240" r="7"/></g>
+    <g fill="#c98168"><circle cx="224" cy="197" r="4"/><circle cx="153" cy="234" r="3.5"/></g>
+    <path d="M105 0 Q92 34 107 64 Q124 90 147 91" fill="none" stroke="#c98168" stroke-width="6" stroke-linecap="round"/>
+    <path d="M270 0 Q286 35 270 62 Q254 88 232 91" fill="none" stroke="#c98168" stroke-width="6" stroke-linecap="round"/>
+    <g fill="#fff9ef"><circle cx="88" cy="120" r="4"/><circle cx="279" cy="131" r="4"/><path d="M91 257 l4 8 8 4 -8 4 -4 8 -4 -8 -8 -4 8 -4Z"/></g>
+   </svg>
+  </div>
+  <div class="story-copy"><span class="eyebrow">Detrás de cada pincelada</span><h2>Todo empezó con mi primer bebé.</h2>
+   <p>Mi historia con la pintura de barrigas comenzó de una forma muy especial: durante mi primer embarazo decidí pintarme yo misma la barriga. Quería celebrar aquel momento tan nuestro y guardar un recuerdo diferente de la llegada de mi bebé.</p>
+   <p>Aquella experiencia despertó algo bonito en mí. Después llegaron las barriguitas de algunas amigas, las ideas compartidas, los colores, las risas y la ilusión de crear algo personal para cada familia.</p>
+   <p>Y así, poco a poco, lo que nació como un recuerdo íntimo se convirtió en una manera de acompañar a otras mujeres en una etapa maravillosa. Para mí, cada barriga es un lienzo distinto y cada diseño cuenta una historia de amor que está a punto de comenzar.</p>
+   <div class="signature">Con cariño, Mayka ♡</div>
+  </div>
+ </div>
+</section>
+<section class="section white" id="galeria">
+ <div class="wrap">
+  <div class="section-head"><span class="eyebrow">Un poquito de inspiración</span><h2>Ideas que florecen en tu barriga</h2><p>Cada diseño puede adaptarse a tus gustos, tus colores favoritos y esa pequeña historia que quieres llevar pintada.</p></div>
+  <div class="gallery-grid">
+   <article class="gallery-item"><svg viewBox="0 0 320 300" aria-label="Ilustración floral"><rect width="320" height="300" fill="#ead8c8"/><ellipse cx="160" cy="173" rx="100" ry="112" fill="#d7a68b"/><path d="M83 0 Q89 72 118 98 Q143 123 127 167 Q104 224 145 281 L205 281 Q249 234 222 174 Q202 129 225 92 Q241 60 237 0Z" fill="#f3e6d7"/><path d="M106 190 Q130 149 158 171 Q180 136 208 165 Q229 191 196 226 L160 258 L128 227Z" fill="#f2d7b6"/><g stroke="#71886b" stroke-width="3" fill="none"><path d="M160 252 Q152 214 172 182 Q187 161 206 160"/><path d="M159 225 Q133 216 122 194"/></g><g fill="#fff8ee" stroke="#d19b84" stroke-width="1.5"><circle cx="206" cy="160" r="11"/><circle cx="206" cy="142" r="11"/><circle cx="223" cy="151" r="11"/><circle cx="216" cy="169" r="11"/><circle cx="197" cy="171" r="11"/><circle cx="122" cy="194" r="9"/><circle cx="122" cy="179" r="9"/><circle cx="136" cy="187" r="9"/><circle cx="130" cy="202" r="9"/></g><g fill="#c98168"><circle cx="206" cy="160" r="5"/><circle cx="122" cy="194" r="4"/></g></svg><div class="gallery-caption">Jardín de ternura</div></article>
+   <article class="gallery-item"><svg viewBox="0 0 320 300" aria-label="Ilustración de bosque"><rect width="320" height="300" fill="#d7e0d1"/><ellipse cx="160" cy="180" rx="100" ry="105" fill="#d5a58c"/><path d="M82 0 Q95 75 120 100 Q142 124 126 169 Q103 226 145 282 L205 282 Q249 234 223 173 Q203 130 226 95 Q244 60 238 0Z" fill="#f2e5d5"/><path d="M115 193 Q136 155 161 175 Q185 145 209 170 Q230 194 195 228 L161 256 L131 228Z" fill="#e9d9a8"/><g fill="#7c9272"><path d="M126 204 l-15 -23 22 7 2 -27 13 23 20 -15 -7 27 21 8 -25 7 -5 25 -12 -22Z"/><path d="M198 186 l-11 -17 17 4 3 -21 10 18 17 -10 -6 20 17 7 -20 5 -4 20 -10 -17Z"/></g><g fill="#c98168"><circle cx="160" cy="218" r="7"/><circle cx="177" cy="231" r="5"/><circle cx="145" cy="235" r="5"/></g><g fill="#fff7e8"><circle cx="98" cy="107" r="4"/><circle cx="230" cy="119" r="4"/><path d="M241 210 l3 7 7 3 -7 3 -3 7 -3 -7 -7 -3 7 -3Z"/></g></svg><div class="gallery-caption">Un bosque encantado</div></article>
+   <article class="gallery-item"><svg viewBox="0 0 320 300" aria-label="Ilustración de luna y estrellas"><rect width="320" height="300" fill="#e8d9b0"/><ellipse cx="160" cy="178" rx="99" ry="108" fill="#d6a68b"/><path d="M83 0 Q91 73 118 99 Q142 123 127 169 Q103 224 145 281 L205 281 Q249 234 223 173 Q202 130 226 95 Q244 59 238 0Z" fill="#f3e6d7"/><path d="M115 193 Q138 153 161 175 Q184 147 208 171 Q228 195 196 228 L160 257 L131 228Z" fill="#e9d7a5"/><path d="M174 170 A31 31 0 1 0 205 207 A25 25 0 0 1 174 170Z" fill="#fff6df"/><g fill="#fff8e9"><path d="M132 168 l5 11 12 4 -12 4 -5 12 -4 -12 -12 -4 12 -4Z"/><path d="M215 223 l4 8 8 3 -8 4 -4 8 -3 -8 -8 -4 8 -3Z"/><circle cx="145" cy="225" r="4"/><circle cx="225" cy="153" r="3"/></g></svg><div class="gallery-caption">Luna, sueños y estrellas</div></article>
+   <article class="gallery-item"><svg viewBox="0 0 320 300" aria-label="Ilustración de mariposas"><rect width="320" height="300" fill="#e5c9b9"/><ellipse cx="160" cy="178" rx="100" ry="108" fill="#d7a58b"/><path d="M83 0 Q91 73 118 99 Q142 123 127 169 Q103 224 145 281 L205 281 Q249 234 223 173 Q202 130 226 95 Q244 59 238 0Z" fill="#f5e7d7"/><path d="M111 201 Q136 162 160 178 Q185 151 208 177 Q229 202 195 230 L160 256 L130 230Z" fill="#f1d8b8"/><g fill="#d48f75" stroke="#fff1df" stroke-width="2"><ellipse cx="139" cy="186" rx="12" ry="18" transform="rotate(-35 139 186)"/><ellipse cx="160" cy="186" rx="12" ry="18" transform="rotate(35 160 186)"/><ellipse cx="144" cy="204" rx="9" ry="12" transform="rotate(30 144 204)"/><ellipse cx="157" cy="204" rx="9" ry="12" transform="rotate(-30 157 204)"/></g><path d="M150 184 l0 22 M150 186 q-9 -12 -10 -15 M151 186 q8 -12 12 -14" stroke="#6e8068" stroke-width="2" fill="none"/><g fill="#829574"><ellipse cx="192" cy="226" rx="7" ry="14" transform="rotate(40 192 226)"/><ellipse cx="125" cy="229" rx="7" ry="14" transform="rotate(-40 125 229)"/></g></svg><div class="gallery-caption">Mariposas de ilusión</div></article>
+   <article class="gallery-item"><svg viewBox="0 0 320 300" aria-label="Ilustración de arcoíris"><rect width="320" height="300" fill="#e7e1d6"/><ellipse cx="160" cy="180" rx="100" ry="108" fill="#d6a68b"/><path d="M83 0 Q91 73 118 99 Q142 123 127 169 Q103 224 145 281 L205 281 Q249 234 223 173 Q202 130 226 95 Q244 59 238 0Z" fill="#f4e7d9"/><path d="M116 199 Q139 160 161 177 Q184 150 207 175 Q228 200 195 230 L160 256 L131 230Z" fill="#ead8a8"/><path d="M125 199 A35 35 0 0 1 195 199" stroke="#c98168" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M135 199 A25 25 0 0 1 185 199" stroke="#d9b77d" stroke-width="8" fill="none" stroke-linecap="round"/><path d="M145 199 A15 15 0 0 1 175 199" stroke="#91a58a" stroke-width="8" fill="none" stroke-linecap="round"/><g fill="#fff9ef"><circle cx="118" cy="178" r="4"/><circle cx="203" cy="179" r="4"/><path d="M213 219 l3 7 7 3 -7 3 -3 7 -3 -7 -7 -3 7 -3Z"/></g></svg><div class="gallery-caption">Un arcoíris de amor</div></article>
+   <article class="gallery-item"><svg viewBox="0 0 320 300" aria-label="Ilustración de osito"><rect width="320" height="300" fill="#d8e0d3"/><ellipse cx="160" cy="180" rx="100" ry="108" fill="#d7a68c"/><path d="M83 0 Q91 73 118 99 Q142 123 127 169 Q103 224 145 281 L205 281 Q249 234 223 173 Q202 130 226 95 Q244 59 238 0Z" fill="#f4e7d8"/><path d="M117 201 Q138 164 161 179 Q184 151 207 176 Q228 201 195 230 L160 256 L131 230Z" fill="#ead8b5"/><g fill="#b88a6f"><circle cx="158" cy="194" r="23"/><circle cx="141" cy="178" r="10"/><circle cx="175" cy="178" r="10"/></g><ellipse cx="158" cy="202" rx="16" ry="13" fill="#e8c6a7"/><circle cx="152" cy="192" r="2.5" fill="#51483f"/><circle cx="165" cy="192" r="2.5" fill="#51483f"/><ellipse cx="158" cy="200" rx="4" ry="3" fill="#51483f"/><path d="M153 205 q5 6 10 0" stroke="#51483f" stroke-width="1.8" fill="none"/><path d="M140 216 Q158 226 176 216" stroke="#fff3dc" stroke-width="3" fill="none" stroke-linecap="round"/></svg><div class="gallery-caption">Un osito para soñar</div></article>
+  </div>
+  <p class="gallery-note">Estas ilustraciones son una muestra de inspiración. Aquí podremos sustituirlas por tus fotografías reales de trabajos, con tu permiso.</p>
+ </div>
+</section>
+<section class="section" id="experiencia">
+ <div class="wrap">
+  <div class="section-head"><span class="eyebrow">Así de bonito y sencillo</span><h2>Vamos a imaginarlo juntas</h2><p>No hace falta que tengas una idea cerrada. ¡Podemos crearla desde cero!</p></div>
+  <div class="process-grid">
+   <article class="process"><h3>Cuéntame tu idea</h3><p>¿Te gustan las flores, los animales, los cuentos, algo minimalista o un diseño con un significado familiar? Cuéntame qué te ilusiona.</p></article>
+   <article class="process"><h3>Diseñamos algo único</h3><p>Hablamos de los detalles y adaptamos la propuesta a tus gustos, para que sientas que ese diseño es verdaderamente tuyo.</p></article>
+   <article class="process"><h3>Disfruta el momento</h3><p>Nos ponemos manos a la obra y convertimos tu barriguita en un recuerdo especial de la dulce espera.</p></article>
+  </div>
+ </div>
+</section>
+<section class="section white" id="precios">
+ <div class="wrap">
+  <div class="price-box"><div><span class="eyebrow">Cada barriga, una historia</span><h2>Tu diseño, a tu medida</h2><p>El precio se consulta según el tipo de diseño, el nivel de detalle, el tiempo necesario y las características de la sesión. Escríbeme y hablaremos de tu idea sin compromiso.</p></div><div class="price-tag"><strong>Precio a consultar</strong><span>Diseños personalizados ♡</span><br><a class="btn" style="margin-top:14px" href="#contacto">Pedir información</a></div></div>
+ </div>
+</section>
+<section class="section" id="contacto">
+ <div class="wrap contact-grid">
+  <div class="contact-copy"><span class="eyebrow">Hagamos algo precioso</span><h2>¿Pintamos tu historia?</h2><p>Cuéntame en qué estás pensando, de cuántas semanas estás y qué estilo te gustaría. Me encantará leerte y ayudarte a imaginar tu diseño.</p>
+   <div class="contact-list">
+    <a class="contact-line" href="mailto:maykarobayo@hotmail.com"><span class="contact-symbol">✉</span><span><b>Escríbeme un correo</b><small>maykarobayo@hotmail.com</small></span></a>
+    <a class="contact-line" href="https://wa.me/34616583065?text=Hola%20Mayka%2C%20me%20gustar%C3%ADa%20informarme%20sobre%20la%20pintura%20de%20barriga." target="_blank" rel="noopener"><span class="contact-symbol">☏</span><span><b>Hablemos por WhatsApp</b><small>616 58 30 65</small></span></a>
+   </div>
+  </div>
+  <div class="form-card"><h3>Cuéntame tu idea ✨</h3><p>Rellena estos datos y prepara tu mensaje para enviármelo por WhatsApp.</p>
+   <form id="ideaForm">
+    <div class="form-row"><label for="name">Tu nombre<input id="name" name="name" placeholder="¿Cómo te llamas?" required></label><label for="weeks">Semanas de embarazo<select id="weeks" name="weeks"><option value="">Selecciona (opcional)</option><option>Menos de 20 semanas</option><option>20–27 semanas</option><option>28–32 semanas</option><option>33 semanas o más</option><option>Estoy consultando para otra persona</option></select></label></div>
+    <label for="style">¿Qué diseño tienes en mente?<input id="style" name="style" placeholder="Flores, animalitos, un tema especial…"></label>
+    <label for="details">Cuéntame un poquito más<textarea id="details" name="details" placeholder="Colores, ideas, fecha aproximada o cualquier detalle que te haga ilusión…"></textarea></label>
+    <button class="btn" type="submit">Preparar mensaje por WhatsApp ↗</button>
+    <p class="form-help">El botón abrirá WhatsApp con tu mensaje preparado para que puedas revisarlo y enviarlo. No se guardan tus datos en esta página.</p>
+    <div class="toast" id="toast" role="status">Si WhatsApp no se abre, puedes escribirme directamente al 616 58 30 65.</div>
+   </form>
+  </div>
+ </div>
+</section>
+</main>
+
+<!-- POP-UP / VENTANA FLOTANTE DEL ÁREA PRIVADA (ADMINISTRACIÓN) -->
+<div class="modal-overlay" id="adminModal" role="dialog" aria-modal="true" aria-label="Área privada de administración">
+ <div class="modal-content">
+  <button class="modal-close" id="closeAdminModal" aria-label="Cerrar ventana">✕</button>
+  <div class="section-head" style="margin-bottom: 25px;">
+   <span class="eyebrow">Solo para la administración</span>
+   <h2>Área privada de PanzArt</h2>
+   <p>Desde aquí podrás preparar la galería con las fotografías de tus trabajos de forma segura.</p>
+  </div>
+  
+  <div id="adminLogin">
+   <h3>Acceso de administración 🔐</h3>
+   <p>Introduce la contraseña de demostración para abrir el gestor en este dispositivo.</p>
+   <form id="adminLoginForm">
+    <label for="adminPassword">Contraseña de administración<input id="adminPassword" type="password" autocomplete="current-password" placeholder="Contraseña" required></label>
+    <button class="btn" type="submit">Entrar al área privada</button>
+    <div class="toast" id="loginError" role="alert">La contraseña no es correcta.</div>
+   </form>
+  </div>
+
+  <div id="adminPanel" hidden>
+   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:15px;">
+    <h3>Gestionar mis fotografías</h3>
+    <button type="button" class="btn secondary" id="adminLogout">Cerrar sesión</button>
+   </div>
+   <p>Selecciona fotos desde el móvil o el ordenador, añade un título y revisa cómo quedaría la galería en tu web.</p>
+   <form id="uploadForm">
+    <label for="photoFiles">Elegir fotografías<input id="photoFiles" type="file" accept="image/*" multiple required></label>
+    <label for="photoTitle">Título para las fotos (opcional)<input id="photoTitle" placeholder="Ej.: Flores silvestres"></label>
+    <button class="btn" type="submit">Añadir a la vista previa</button>
+   </form>
+   <div id="adminPreview" class="admin-preview" aria-live="polite"></div>
+   <p class="form-help" style="margin-top: 15px;">Para publicar fotos de forma permanente y visibles para todos los visitantes, recuerda conectar esta web a tu base de datos de Firebase.</p>
+  </div>
+ </div>
+</div>
+
+<footer>
+ <div class="wrap footer-row"><div><div class="footer-brand">PanzArt ♡</div><div class="footer-small">Arte en tu barriguita · Un recuerdo para toda la vida.</div></div><div class="footer-links"><a href="#inicio">Inicio</a><a href="#galeria">Galería</a><a href="#contacto">Contacto</a></div><div class="footer-small">Hecho con mimo y mucha ilusión.</div></div>
+</footer>
+
+<a class="whatsapp" href="https://wa.me/34616583065?text=Hola%20Mayka%2C%20he%20visto%20tu%20p%C3%A1gina%20y%20me%20gustar%C3%ADa%20informarme." target="_blank" rel="noopener" aria-label="Contactar con Mayka por WhatsApp">
+ <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.52 3.48A11.82 11.82 0 0 0 12.1 0C5.55 0 .22 5.33.22 11.9c0 2.1.55 4.15 1.6 5.96L.12 24l6.3-1.65a11.9 11.9 0 0 0 5.68 1.44h.01c6.56 0 11.9-5.34 11.9-11.9 0-3.18-1.24-6.17-3.49-8.41ZM12.1 21.77h-.01a9.88 9.88 0 0 1-5.03-1.37l-.36-.21-3.74.98 1-3.65-.24-.38a9.86 9.86 0 0 1-1.52-5.24c0-5.46 4.44-9.9 9.9-9.9 2.65 0 5.13 1.03 7 2.9a9.83 9.83 0 0 1 2.9 7c0 5.46-4.44 9.9-9.9 9.9Zm5.43-7.41c-.3-.15-1.77-.87-2.05-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.95 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.47-.89-.79-1.49-1.77-1.67-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.48-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.49s1.07 2.89 1.22 3.09c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.13-.27-.2-.57-.35Z"/></svg>
+</a>
+
+<script>
+const toggle=document.getElementById('menuToggle');
+const nav=document.getElementById('navlinks');
+toggle.addEventListener('click',()=>{const open=nav.classList.toggle('open');toggle.setAttribute('aria-expanded',String(open));toggle.innerHTML=open?'✕ Cerrar':'☰ Menú';});
+nav.querySelectorAll('a:not(#openAdminModal)').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');toggle.setAttribute('aria-expanded','false');toggle.innerHTML='☰ Menú';}));
+
+// Control del Pop-up de Administración
+const adminModal = document.getElementById('adminModal');
+const openAdminModal = document.getElementById('openAdminModal');
+const closeAdminModal = document.getElementById('closeAdminModal');
+
+openAdminModal.addEventListener('click', (e) => {
+ e.preventDefault();
+ adminModal.classList.add('open');
+ nav.classList.remove('open');
+ toggle.setAttribute('aria-expanded','false');
+ toggle.innerHTML='☰ Menú';
+});
+
+closeAdminModal.addEventListener('click', () => {
+ adminModal.classList.remove('open');
+});
+
+adminModal.addEventListener('click', (e) => {
+ if(e.target === adminModal) {
+  adminModal.classList.remove('open');
+ }
+});
+
+document.getElementById('ideaForm').addEventListener('submit',function(e){
+ e.preventDefault();
+ const name=document.getElementById('name').value.trim();
+ const weeks=document.getElementById('weeks').value;
+ const style=document.getElementById('style').value.trim();
+ const details=document.getElementById('details').value.trim();
+ let msg='Hola Mayka, soy '+name+'. Me gustaría informarme sobre la pintura de barriga.';
+ if(weeks)msg+='\nSemanas: '+weeks+'.';
+ if(style)msg+='\nIdea de diseño: '+style+'.';
+ if(details)msg+='\nMás detalles: '+details;
+ msg+='\n¡Gracias!';
+ const url='https://wa.me/34616583065?text='+encodeURIComponent(msg);
+ const win=window.open(url,'_blank','noopener');
+ if(!win){document.getElementById('toast').style.display='block';}
+});
+
+const ADMIN_DEMO_PASSWORD='Sacha2009@';
+const loginForm=document.getElementById('adminLoginForm');
+const adminLogin=document.getElementById('adminLogin');
+const adminPanel=document.getElementById('adminPanel');
+const loginError=document.getElementById('loginError');
+const preview=document.getElementById('adminPreview');
+let previewPhotos=[];
+
+loginForm.addEventListener('submit',e=>{
+ e.preventDefault();
+ if(document.getElementById('adminPassword').value===ADMIN_DEMO_PASSWORD){
+  adminLogin.hidden=true;adminPanel.hidden=false;loginError.style.display='none';
+ }else{loginError.style.display='block';}
+});
+
+document.getElementById('adminLogout').addEventListener('click',()=>{
+ adminPanel.hidden=true;adminLogin.hidden=false;document.getElementById('adminPassword').value='';
+});
+
+document.getElementById('uploadForm').addEventListener('submit',e=>{
+ e.preventDefault();
+ const files=[...document.getElementById('photoFiles').files].filter(f=>f.type.startsWith('image/'));
+ const title=document.getElementById('photoTitle').value.trim();
+ files.forEach((file,i)=>{
+  const reader=new FileReader();
+  reader.onload=()=>{
+   previewPhotos.push({src:reader.result,title:title || file.name});
+   renderPreview();
+  };
+  reader.readAsDataURL(file);
+ });
+});
+
+function renderPreview(){
+ preview.innerHTML='';
+ previewPhotos.forEach((photo,index)=>{
+  const card=document.createElement('article');card.className='admin-photo';
+  const img=document.createElement('img');img.src=photo.src;img.alt=photo.title;
+  const caption=document.createElement('div');caption.textContent=photo.title;
+  const remove=document.createElement('button');remove.type='button';remove.textContent='Quitar de la vista previa';
+  remove.addEventListener('click',()=>{previewPhotos.splice(index,1);renderPreview();});
+  card.append(img,caption,remove);preview.appendChild(card);
+ });
+}
+</script// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyAOiVA2vPLg-jBcbcov-xWt7oNB5pUIgAk",
+  authDomain: "panzart-fa595.firebaseapp.com",
+  projectId: "panzart-fa595",
+  storageBucket: "panzart-fa595.firebasestorage.app",
+  messagingSenderId: "419561082844",
+  appId: "1:419561082844:web:1c5fb1aa64bc4763db8919",
+  measurementId: "G-HP4YGP53PY"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);>
+</body>
+</html>
